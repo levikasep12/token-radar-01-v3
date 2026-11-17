@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — radar-4</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <h1>Token Launch Radar</h1>
+      <p class="tagline">Pre-token protocols, ranked by an implied token value fitted from the live-token comparables in the snapshot — nothing hardcoded by name.</p>
+    </div>
+    <dl class="headline-stats" id="headline-stats"></dl>
+  </div>
+</header>
+
+<main>
+  <section class="panel validation" id="validation" aria-label="Model validation"></section>
+
+  <section class="controls" aria-label="Filters">
+    <label class="search-label">Search <input id="q" type="search" placeholder="Protocol name or slug" autocomplete="off"></label>
+    <label>Category <select id="category"><option value="">All categories</option></select></label>
+    <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+    <label class="check"><input id="watchlist-only" type="checkbox"> Watchlist only</label>
+    <span class="count" id="count"></span>
+  </section>
+
+  <nav class="tabs" aria-label="Views">
+    <button id="tab-board" class="tab active" type="button">Board</button>
+    <button id="tab-live" class="tab" type="button">Live tokens</button>
+    <button id="tab-aside" class="tab" type="button">Set aside</button>
+  </nav>
+
+  <section id="view-board" class="view">
+    <table class="board" id="board-table">
+      <thead><tr>
+        <th data-sort="rank">#</th>
+        <th data-sort="name">Protocol</th>
+        <th data-sort="category">Category</th>
+        <th data-sort="tvl_usd">TVL</th>
+        <th data-sort="implied_value_usd">Implied value</th>
+        <th data-sort="farm_net_usd">Farm net</th>
+        <th data-sort="age_days">Age</th>
+      </tr></thead>
+      <tbody id="board-body"></tbody>
+    </table>
+    <p class="footnote">Implied value = TVL × fitted multiple × growth × age. Farm net = expected airdrop at the stated 7.5% assumption minus gas. Click a row for the full breakdown and farm plan.</p>
+  </section>
+
+  <section id="view-live" class="view hidden">
+    <p class="intro">Protocols whose token already trades — shown for reference and kept off the board. The model's comparables come from this set.</p>
+    <table class="board" id="live-table">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Market cap</th><th>Multiple</th></tr></thead>
+      <tbody id="live-body"></tbody>
+    </table>
+  </section>
+
+  <section id="view-aside" class="view hidden">
+    <p class="intro">Pre-token protocols the board sets aside, with the reason for each: bridges, exchanges, liquid-staking receipts, versioned names and wrapped products are not launches to come.</p>
+    <table class="board" id="aside-table">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Why set aside</th></tr></thead>
+      <tbody id="aside-body"></tbody>
+    </table>
+  </section>
+
+  <section id="detail" class="detail hidden" aria-label="Protocol detail"></section>
+</main>
+
+<footer>
+  <p>Snapshot <span id="as-of"></span> · Model radar-4, fitted at run time from the snapshot · Gas figures are estimates · Airdrop figures assume 7.5% of the implied value is distributed pro-rata — an assumption, stated, not a promise.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
